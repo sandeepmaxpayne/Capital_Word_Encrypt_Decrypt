@@ -1,5 +1,6 @@
 # Encypt and Decrypt Capital Words using Logical Number System
 <li>
+<<<<<<< HEAD
 <b><ul>This is a simple encryption and decrption algorithm for Capital or Lower Case alphabetic Characters</ul></b>
 
 To run :
@@ -48,3 +49,9 @@ Finally we will get  the desired integer value that was taken at the time of enc
 This project is limited only to words and not to sentence.
 
 <code href="https://github.com/sandeepmaxpayne/Capital_Word_Encrypt_Decrypt/blob/master/LICENSE">License</code>
+=======
+<b> This is a simple encryption and decrption of alphabets</b>
+</li>
+
+# The steps are as followed
+>>>>>>> d54885b49359346e5f76020a9e6aef11a3c9bd68
