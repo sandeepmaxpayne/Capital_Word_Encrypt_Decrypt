@@ -26,7 +26,7 @@ The decrypting of single character is similar to that of encrypting the single c
 
 <b>Encrypting</b>:  
 <li>
-Z => A
+Z => A,
 X => W
 Till
 B => A
@@ -34,7 +34,7 @@ B => A
 
 
 Decrypting:
-A => B
+A => B,
 B => C
 Till
 Z => A
