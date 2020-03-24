@@ -41,7 +41,7 @@ Z => A
 
 The decryption process will be the reverse procedure of encrypted one. But in reality it should be more complicated otherwise its can easily be cracked.
 
-Suppose:
+<i>Suppose</i>:
 Encrypted text = “HJ6UUZ”
 Split the values and then extract the decimal value from it.
 Then we will convert this into 127 bit number system.
@@ -50,7 +50,8 @@ Finally we will get  the desired integer value that was taken at the time of enc
 <h3>Limitation </h3>
 This project is limited only to words and not to sentence.
 
-<code>License</code>
+<h2>License</h2>
+
 <p>The project is released under <a href="https://github.com/sandeepmaxpayne/Capital_Word_Encrypt_Decrypt/blob/master/LICENSE">MIT License</a></p>
-=======
+
 
