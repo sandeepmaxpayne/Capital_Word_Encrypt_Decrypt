@@ -1,0 +1,9 @@
+# action.yml
+name: 'Characters Encrypt and Decrypt '
+description: 'Encrypt and Decrypt using number system and logical operations'
+runs:
+  using: 'python'
+  
+branding:
+  icon: 'none'  
+  
