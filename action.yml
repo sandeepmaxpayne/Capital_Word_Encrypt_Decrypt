@@ -2,8 +2,10 @@
 name: 'Characters Encrypt and Decrypt '
 description: 'Encrypt and Decrypt using number system and logical operations'
 runs:
-  using: 'python'
+  using: 'docker'
+  image: 'Dockerfile'
   
 branding:
   icon: 'none'  
+  color: green
   
