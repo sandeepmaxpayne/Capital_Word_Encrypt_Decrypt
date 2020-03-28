@@ -1,4 +1,6 @@
 import math
+import small_letters
+import number
 
 class Short_Message:
     def __init__(self, message):
@@ -11,9 +13,31 @@ class Short_Message:
         return self.message
 
 
+
+
 def encryptStr():
-    msg = input('enter message: ').upper()
+    # sm_x = small_letters.Small_Letter('halo')
+    # y = sm_x.encrypt_small_message()
+    # print(y)
+
+    
+    msg = input('enter message: ')
+
+    ''' Use Dict to get the records of small letters, capital letters and nuumbers'''
+    xx, yy = [], []
+    for i, j in enumerate(msg):
+        print(i, j)
+        xx.append(i)
+        yy.append(j)
+    zz = dict(zip(xx, yy))
+    print(zz)
+
+
     x = msg.split()
+    print(x)
+    
+
+
     as_num = ""
     for j in x[0]:
     #    print(ord(j))
@@ -85,6 +109,7 @@ def encryptStr():
         key ^= int(i)
     print("secret key: ", key)
 
+    print(ord('a'), ord('z'))
 
 
 
