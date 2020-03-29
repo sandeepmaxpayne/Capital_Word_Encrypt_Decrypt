@@ -1,4 +1,13 @@
 ''' All the important commments on solving out this problem is made using this comments'''
+
+'''Reprsentaation of ascii value order from 100 to 122
+    1 => 10
+    2 => 11
+    3 => 12
+
+    # From 97 to 99 make no change 
+    # Reason: To make simpler for calculation convert all ASCII values only upto 2 digits only
+ '''
 class Small_Letter:
     def __init__(self, message):
         self.message = message

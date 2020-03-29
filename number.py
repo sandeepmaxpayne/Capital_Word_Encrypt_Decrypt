@@ -10,6 +10,3 @@ class Number:
 ''' list of generated ascii from 0 to 9 are [48, 49, 50, 51, 52, 53, 54, 55, 56, 57]
     So concatenate  all the generated values in order to get our concatenated list
 '''
-
-'''
-'''
