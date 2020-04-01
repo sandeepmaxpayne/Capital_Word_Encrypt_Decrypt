@@ -184,6 +184,7 @@ def encryptStr():
     '''TODO Numbers Encryption Process '''
 
     number_x = arr_number
+    number_x = '12345'
     if len(number_x) > 0:
         number_func = number.Number(number_x)
         call_num_func = number_func.encrypt_number()
@@ -235,7 +236,15 @@ def encryptStr():
     encrypted_key = key_caps_str + key_num_str + key_small_str
     print(f'encrypted public key: {encrypted_key}')
     
+    ''' Concat all  the encrypted text in such a way that it is easy to identify whether it is a for Capital, Small or Number '''
 
+    print(f'encrypted capital: {enc}, encrtpted small: {small_enc}, encrypted number: {num_enc}')
+
+    ''' encrypyted text should be concatenated using " - "  '''
+
+    final_encrypt = f'{enc}-{small_enc}-{num_enc}'
+
+    print("Whole encrypted word: {0}".format(final_encrypt))
 
 
 

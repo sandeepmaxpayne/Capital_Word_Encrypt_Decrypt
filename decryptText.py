@@ -1,5 +1,6 @@
 import re
-from random import randint
+import decryptSmall
+import decrypt_number
 
 class Decrypt_Single_Message:
     def __init__(self, encypt_Text):
@@ -11,20 +12,37 @@ class Decrypt_Single_Message:
             self.encrypt_text = chr(ord(self.encrypt_text) - 1)
         return self.encrypt_text
 
+
+def number_system_127(decimal_number):
+    pass
+
 def decryptText():
+    '''TODO input of encrypted text '''
 
-    rand = randint(10**9, 10**10)
+    complex_encrypted_text = 'DFEJ4UYTYSSQWUSXZ-gjd3yssurvurrxvsx-QSPSOSNSWR'
+    separate_complex = complex_encrypted_text.split('-')
+    print(f'compex separated: {separate_complex}')
+
+    small_encrypted_input = 'gjd3yssurvurrxvsx'
+    number_encrypted_input = 'VR'
+    encrypted_order_key = 'c0n5s1234'
+
+    # ss = decryptSmall.DecryptSmallLetter(small_encrypted_input)
+    # print(f'decrypted small: {ss.decrypt_small()}')
+
+    # s = decrypt_number.Number_decryption('QSPSOSNSWR')
+    # print(s.decrypt_number_function())
+   
     ErrRed = lambda x: '\033[31m' + str(x)
-   # print(rand)
-    ## suppose 10000 is main key do sub and get pub and priv key, then combine both to get exact to get sol
-
-    # encrp_text = "EFAH3WURQXUTXQVTX"
-    # secret_key = 264926574891
-    encrp_text = input("Enter the encrypted text: ")
-    secret_key = int(input("Enter secret key: "))
+ 
+    ''' suppose 10000 is main key do sub and get pub and priv key, then combine both to get exact to get sol'''
+    secret_key = 27539741305
+   # encrp_text = input("Enter the encrypted text: ")
+    encrp_text = 'DFEJ4UYTYSSQWUSXZ'
+    #secret_key = int(input("Enter secret key: "))
     iter = re.findall(r'\d', encrp_text)
     x = re.split(r'\d', encrp_text)
-   # print(x, iter)
+    print(x, iter)
 
     #print(iter)
     if len(iter) < 1:
@@ -40,7 +58,7 @@ def decryptText():
     else:
         iter = int(iter[0])
 
-        # to reverse the encrypted string after decimal part
+        ''' To reverse the encrypted string after decimal part'''
         x2 = x[1][::-1]
         decryp1, decryp2 = "", ""
         for i in x2:
@@ -49,7 +67,7 @@ def decryptText():
             decryp2 += str(rev_dec)
         #   print(decryp2)
 
-        # to decrypt the first index of x list
+        ''' to decrypt the first index of x list'''
         for i in x[0]:
             start = 65
             start_dec = ord(i)
@@ -57,7 +75,7 @@ def decryptText():
         # print(decryp1)
 
 
-        decryp_val = decryp1 + "." + decryp2
+        decryp_val = f'{decryp1}.{decryp2}'
         # print(float(decryp_val))
 
         value = float(decryp_val)
@@ -90,10 +108,10 @@ def decryptText():
 
             # print(s1)
             # print(type(s1))
-            value = round(s1)
-            #  print(value)
+            value = int(s1)
+            print(f'value: {value}')
             y = re.findall(r'\d{2}', str(value))
-            print(y)
+            print(f'y: {y}')
 
             txt = ""
             for k in y:
