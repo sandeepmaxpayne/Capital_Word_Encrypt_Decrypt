@@ -27,7 +27,7 @@ def number_system_127(number_value):
     #print(strbb1)
     ''' Add the counter at end of index0'''
     strbb1[0] += str(c)
-    #print(f'function strbb1: {strbb1}')
+    print(f'function strbb1: {strbb1}')
     ''' return [(Integer Value index1 + counter value), Integer Value index2] '''
     return strbb1
    
@@ -40,7 +40,7 @@ def encryptStr():
 '''
     
     # msg = input('enter message: ')
-    msg = 'Hello0'
+    msg = 'SANDEEPello0'
     ''' Use Dict to get the records of small letters, capital letters and nuumber s'''
     xx, yy = [], []
     for i, j in enumerate(msg):
@@ -90,8 +90,8 @@ def encryptStr():
 
     ''' Capital letters encryption process '''
     
-    #cap_x = arr_capital
-    cap_x = 'HELLO'
+    cap_x = arr_capital
+    # cap_x = 'HELLO'
     if len(cap_x) > 0:
         as_num = ""
         for j in cap_x:
@@ -184,7 +184,6 @@ def encryptStr():
     '''TODO Numbers Encryption Process '''
 
     number_x = arr_number
-    number_x = '12345'
     if len(number_x) > 0:
         number_func = number.Number(number_x)
         call_num_func = number_func.encrypt_number()
