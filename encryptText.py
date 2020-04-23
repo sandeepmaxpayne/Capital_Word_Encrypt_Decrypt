@@ -22,11 +22,12 @@ def number_system_127(number_value):
         bb1 = number_value
         number_value = number_value / 127
     #print(r, c, bb1, s)
+    print(f'count: {c}')
     strbb1 = str(bb1)
     strbb1 = strbb1.split(".")
     #print(strbb1)
     ''' Add the counter at end of index0'''
-    strbb1[0] += str(c)
+    strbb1[0] += "-" + str(c)
     print(f'function strbb1: {strbb1}')
     ''' return [(Integer Value index1 + counter value), Integer Value index2] '''
     return strbb1
@@ -40,9 +41,9 @@ def encryptStr():
 '''
     
     # msg = input('enter message: ')
-    msg = 'SANDEEPello0'
+    msg = 'monster'
     ''' Use Dict to get the records of small letters, capital letters and nuumber s'''
-    xx, yy = [], []
+    xx, yy = [], [] 
     for i, j in enumerate(msg):
         xx.append(i)
         yy.append(j)
@@ -97,7 +98,7 @@ def encryptStr():
         for j in cap_x:
             ''' Get the letter ascii value and concat it by following next ascii value '''
             as_num += str(ord(j))
-        # print(as_num)
+        print(f'ascii capital: {as_num}')
         b = int(as_num)
         
     
@@ -106,10 +107,13 @@ def encryptStr():
         ''' strbb1 is the return value of number_system_127(b) '''
 
         enc1, enc2 = "", ""
+        
         strbb1 = number_system_127(b)
-        counter_value = strbb1[0][-1] 
+        getstrbb1 = strbb1[0].split('-')
+        # print(f'getstrbb1: {getstrbb1}')
+        counter_value = getstrbb1[1] 
         if len(strbb1) > 1:    
-            for k in (strbb1[0][:-1]):
+            for k in (getstrbb1[0]):
                 #print(k)
                 #print(chr(65+int(k)))
                 enc1 += chr(65+int(k))
@@ -138,7 +142,9 @@ def encryptStr():
         
         ''' Calculating the secret key simply '''
         key = 0
-        for i in strbb1:
+        xor_strbb1 = [int(getstrbb1[0])] + [int(strbb1[1])]
+        print(f'xor_strbb1: {xor_strbb1}')
+        for i in xor_strbb1:
             key ^= int(i)
         print("secret key: ", key)
         print(ord('a'), ord('z'))
@@ -156,13 +162,15 @@ def encryptStr():
         calc_num_127 = number_system_127(call_small_func_toInt)
         ''' Converted to num 127 format using 127 bit number system value and split the decimal value'''
         print(f'calculate num 127: {calc_num_127}')
-        counter_value = calc_num_127[0][-1]
+        counter_value = calc_num_127[0].split('-')[1]
         print(f'counter value: {counter_value}')
 
         ''' For calc_num_127[index1] excluding counter value extract each value and add it to 97 as of ascending order '''
 
         small_enc1, small_enc2 = "", ""
-        for k in calc_num_127[0][:-1]:
+        print(calc_num_127)
+        print(calc_num_127[0].split('-')[0])
+        for k in calc_num_127[0].split('-')[0]:
             small_enc1 += chr(97 + int(k))
         small_enc1 += str(counter_value)
         print(f'small_enc1: {small_enc1}')
@@ -214,11 +222,11 @@ def encryptStr():
     print(f'{key_caps, key_num, key_small}')  
     key_caps_str, key_num_str, key_small_str = '', '', ''
     for i in key_caps:
-        key_caps_str += str(i)
+        key_caps_str += str(i) + "-"
     for i in key_num:
-        key_num_str += str(i)
+        key_num_str += str(i) + "-"
     for i in key_small:
-        key_small_str += str(i)
+        key_small_str += str(i) + "-"
     print(f'cap: {key_caps_str}, num: {key_num_str}, small: {key_small_str} ')  
 
     ''' Let arrange the keys as in format [Alphabetic Character][Number] where 

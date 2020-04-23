@@ -20,7 +20,7 @@ def number_system_127(decimal_number):
 def decryptText():
     '''TODO input of encrypted text '''
 
-    complex_encrypted_text = 'CFDC6WRSTQWXVRSXVY-gjd3yssurvurrxvsx-VR'
+    complex_encrypted_text = 'GFJG2SXRURWWYQXQT-bbda10wrqqtzttrzvwq-OSNSWR'
     separate_complex = complex_encrypted_text.split('-')
     print(f'compex separated: {separate_complex}')
 
@@ -31,7 +31,7 @@ def decryptText():
     for i in separate_complex:
         if i[0].islower():
             small_encrypted_input  = i
-        elif i[0].isupper() and re.findall(r'\d', i):
+        elif i[0].isupper() and re.findall(r'\d+', i):
             capital_encrp_text = i
         else:
             number_encrypted_input = i
@@ -42,13 +42,13 @@ def decryptText():
     ErrRed = lambda x: '\033[31m' + str(x)
  
     ''' suppose 10000 is main key do sub and get pub and priv key, then combine both to get exact to get sol'''
-    secret_key = 1427842371713
+    secret_key = 692913383591
    # encrp_text = input("Enter the encrypted text: ")
     # capital_encrp_text = 'DFEJ4UYTYSSQWUSXZ'
     #secret_key = int(input("Enter secret key: "))
-    iter = re.findall(r'\d', capital_encrp_text)
-    x = re.split(r'\d', capital_encrp_text)
-    print(x, iter)
+    iter = re.findall(r'\d+', capital_encrp_text)
+    x = re.split(r'\d+', capital_encrp_text)
+    print(f' iteration : {x}, {iter}')
 
     ''' TODO Decrypt the capital encypted text'''
     #print(iter)
@@ -72,7 +72,7 @@ def decryptText():
             last = 90
             rev_dec = 90 - ord(i)
             decryp2 += str(rev_dec)
-        #   print(decryp2)
+ 
 
         ''' to decrypt the first index of x list'''
         for i in x[0]:
@@ -88,19 +88,19 @@ def decryptText():
         if len(decryp2).__eq__(0):
             decryp2 = None
 
-        # print(f"d1={decryp1}, d2={(decryp2)}")
+        print(f"d1={decryp1}, d2={(decryp2)}")
 
         if decryp1 is not None and decryp2 is None:
-            exact_key = int(str(decryp1) + str(iter))
+            exact_key = int(str(decryp1))
         else:
-            exact_key = int(str(decryp1) + str(iter)) ^ int(decryp2)
+            exact_key = int(str(decryp1)) ^ int(decryp2)
 
-        # print(exact_key)
+        print(f'exact key: {exact_key}')
         # print(iter)
         if exact_key.__eq__(secret_key):
             print("Secrect Key is Correct")
             print("Decrypting Data.......")
-            if iter > 2:
+            if iter > 1:
                 for j in range(iter-1):
                     s = value
                     s1 = 127 * s
@@ -134,65 +134,50 @@ def decryptText():
     decrypt_number_str = decrypt_number.Number_decryption(number_encrypted_input).decrypt_number_function()
     print(f'decrypted number:  {decrypt_number_str}')
 
-    '''TODO Arrange the order of all decryoted letter and number using the decrypted order dictionary '''
+    '''TODO Arrange the order of all decryoted letter and number using the decrypted order dictionary order : Capital + Num + Small '''
     
     ''' Get the encrypyted order key dictionary '''
-    encrypted_order_key = 'c0123456n11s78910'
-    decrypted_order_key_dict = decrypt_order_key.OrderKey(encrypted_order_key).decrypt_order_key()
+    # encrypted_order_key = 'c0123456n11s78910'
+    encrypted_order_key = 'c0-7-10-n14-15-16-s1-2-3-4-5-6-8-9-11-12-13'
+    decrypted_order_key_dict = decrypt_order_key.OrderKey(encrypted_order_key).decryptOrderKey()
     print(f'decrypted order key dict: {decrypted_order_key_dict}')
     
-    decrypted_capital_txt = txt
-    print(f'decrypted capital text: {decrypted_capital_txt}')
-
-
-    '''Converet the string index "0123" to integer value index '''
-    single_digit_c, single_digit_s, single_digit_n = '', '', '' 
-    double_digit_c, double_digit_s, double_digit_n = '', '', ''    
-    is_nine_c = '9' in decrypted_order_key_dict['c'] 
-    is_nine_s = '9' in decrypted_order_key_dict['s']
-    is_nine_n = '9' in decrypted_order_key_dict['n']
-
-    token = 0
+    cap_order = decrypted_order_key_dict[0]
+    num_order = decrypted_order_key_dict[1]
+    small_order = decrypted_order_key_dict[2]
     
-    if is_nine_c.__eq__(True):
-        index_nine = decrypted_order_key_dict['c'].index('9')
-        single_digit_c = decrypted_order_key_dict['c'][:index_nine+1]
-        double_digit_c = decrypted_order_key_dict['c'][index_nine+1:]
-        token += 1
-    else:
-        single_digit_c = decrypted_order_key_dict['c'][:]
+    cap_order.insert(0, cap_order[0][1:])
+    cap_order.pop(1)
+    num_order.insert(0, num_order[0][1:])
+    num_order.pop(1)
+    small_order.insert(0, small_order[0][1:])
+    small_order.pop(1)
+    
+    
+    print(f'cap_order: {cap_order[0]}, num_order: {num_order}, small_order: {small_order}')
+    order_dictionary = cap_order + num_order + small_order
+    print(f'order dictionary: {order_dictionary}')
 
-    if token == 1:
-        double_digit_s = decrypted_order_key_dict['s'][:]
-        token += 1
-    elif is_nine_s.__eq__(True):
-        index_nine = decrypted_order_key_dict['s'].index('9')
-        single_digit_s = decrypted_order_key_dict['s'][:index_nine+1]
-        double_digit_s = decrypted_order_key_dict['s'][index_nine+1:]
-        token += 1
-    else:
-        single_digit_s = decrypted_order_key_dict['s'][:]
+    decrypted_capital_txt = txt
+    print(f'decrypted capital text: {decrypted_capital_txt}, decrypted small text: {decrypt_small_text}, decrypted number: {decrypt_number_str}')
+    order_decrypt_word = decrypted_capital_txt + decrypt_number_str + decrypt_small_text
+    print(f'ordered decrypted word: {order_decrypt_word}')
 
-    if token >=1:
-        double_digit_n = decrypted_order_key_dict['n'][:] 
-    elif is_nine_n.__eq__(True):
-        index_nine = decrypted_order_key_dict['n'].index('9')
-        single_digit_n = decrypted_order_key_dict['n'][:index_nine+1]
-        double_digit_n = decrypted_order_key_dict['n'][index_nine+1:]
-    else:
-        single_digit_n = decrypted_order_key_dict['n'][:]
-    #print(f'single c: {single_digit_c}, double c: {double_digit_c}\nsingle s: {single_digit_s}, double s: {double_digit_s}\nsingle n: {single_digit_n}, double n: {double_digit_n}')
+    
+    ''' Get the arranged Dictionary '''
+    arr_decrypt_dict = dict(zip(order_dictionary, order_decrypt_word))
+    print(f'dict: {arr_decrypt_dict}')
+    
 
-    single_digit, double_digit = '', ''
+    '''Get the decrypted text '''
+    print(len(arr_decrypt_dict))
+    decrypted_text = ''
+    for key in range(len(arr_decrypt_dict)):
+        if key.__eq__(arr_decrypt_dict[f'{key}']):
+            decrypted_text += arr_decrypt_dict[f'{key}']
+    print(f'Decrypted Text: {decrypted_text}')  
 
-    single_digit = single_digit_c + single_digit_s + single_digit_n
-    double_digit = double_digit_c + double_digit_s + double_digit_n
-
-    print(f'singledigitL {single_digit}, doubledigit: {double_digit}')
-
-    single_dig_list = re.findall(r'\d{1}', single_digit)
-    double_dig_list = re.findall(r'\d{2}', double_digit)
-    print(f'single_dig_list: {single_dig_list}, double_dig_list: {double_dig_list}')    
-
+   
+    
 
 decryptText()

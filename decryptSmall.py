@@ -19,10 +19,10 @@ class DecryptSmallLetter():
         encrpted_small_text = self.input_encrypted_small
         print(encrpted_small_text)
         encryp_x = re.split(r'\d', encrpted_small_text)
-        #print(encryp_x)
+        print(f'smallencyrpt: {encryp_x}')
         ''' Count the number  '''
-        iter_count = len(encryp_x[0])
-        #print(f'iter count: {iter_count}')
+        iter_count = re.findall(r'\d+', encrpted_small_text)
+        print(f'iter count: {iter_count}')
         ''' Reverse the [index 2] encrypted text'''
         rev_small_encry_x = encryp_x[1][::-1]
         #print(f'reversed index 2: {rev_small_encry_x}') 
@@ -46,17 +46,18 @@ class DecryptSmallLetter():
         '''Form the original decimal value of 127 numbeer system '''
         decrypt_value = float(f'{self.__decrypt_index1}.{self.__decrypt_index2}')
         #print(f'decrypte value: {decrypt_value}, type: {type(decrypt_value)}')
-        if iter_count > 2:
-            for j in range(iter_count - 1):
+        s1 = 0
+        if len(iter_count) > 0:
+            for j in range(int(iter_count[0]) - 1):
                 s = decrypt_value
                 s1 = 127 * s
                 decrypt_value = s1
         else:
             '''TODO for iter < 2 if any '''
-            s1 = decrypt_value
-        #print(f'float value: {s1}')
-        decrypt_value = int(s1)
-        #print(f'decrypted value: {decrypt_value}, type: {type(decrypt_value)}')
+            s1 = int(decrypt_value)
+        print(f'float value: {s1}')
+        decrypt_value = s1
+        print(f'decrypted value: {decrypt_value}, type: {type(decrypt_value)}')
         y = re.findall(r'\d{2}', str(decrypt_value))
         #print(f' list y val: {y}, type[index0]:{type(y[0])}')
 
@@ -68,7 +69,7 @@ class DecryptSmallLetter():
                 self.__decrpt_ascii.append(f'11{j[1]}')
             else:
                 self.__decrpt_ascii.append(f'12{j[1]}')
-        #print(f'decrpt_ascii: {self.__decrpt_ascii}')
+        print(f'decrpt_ascii: {self.__decrpt_ascii}')
         decrpted_small_txt = ''
         for i in self.__decrpt_ascii:
             decrpted_small_txt += chr(int(i))
