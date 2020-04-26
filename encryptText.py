@@ -1,6 +1,27 @@
 import math
+
+import os
+import sys
+
+scriptpath = "calculate_encrypt/"
+
+sys.path.append(os.path.abspath(scriptpath))
+
 import small_letters
 import number
+
+
+'''
+    TODO
+    Limitations 
+    Only Capitals Words, or ,
+    Only Small Words, or ,
+    Only Numbers, or ,
+    Must be a combination of capital word, small word and numbers
+    
+    
+ '''
+
 
 class Short_Message:
     def __init__(self, message):
@@ -41,58 +62,103 @@ def encryptStr():
 '''
     
     # msg = input('enter message: ')
-    msg = 'monster'
+    msg = '8709456537'
+
+    ''' Check if the input word is Neither only capital nor only small nor only number then go further else go for single checking'''
+    flag = False # use to check only num, only small char, only cap if flag = True
+    cp, sm, nu = 0, 0, 0
+    for i in msg:
+        if i.islower():
+            sm += 1
+        elif i.isupper():
+            cp += 1
+        elif i.isdigit():
+            nu += 1
+    print(f'count cap: {cp}, count small: {sm}, count number: {nu}')
+
+    if len(msg).__eq__(cp):
+        flag = True
+    elif len(msg).__eq__(sm):
+        flag = True
+    elif len(msg).__eq__(nu):
+        flag = True
+    else:
+        flag = False
+
+
+
     ''' Use Dict to get the records of small letters, capital letters and nuumber s'''
-    xx, yy = [], [] 
-    for i, j in enumerate(msg):
-        xx.append(i)
-        yy.append(j)
-    word_dict = dict(zip(xx, yy))
-    print(f"word dictionary: {word_dict} length: {len(word_dict)}")
+    if not flag :
+        xx, yy = [], [] 
+        for i, j in enumerate(msg):
+            xx.append(i)
+            yy.append(j)
+        word_dict = dict(zip(xx, yy))
+        print(f"word dictionary: {word_dict} length: {len(word_dict)}")
 
 
     # x = msg.split()
     # print(x)
     
 
-    '''Key Mapping based on a particular word'''
-    key_caps, key_small, key_num = [], [], []
-    for key in word_dict:
-        print(f"key: {key} val: {word_dict[key]}")
-        ''' Determine the  category of letters here and separate'''
+    if not flag:
+        '''Key Mapping based on a particular word'''
+        key_caps, key_small, key_num = [], [], []
+        for key in word_dict:
+            print(f"key: {key} val: {word_dict[key]}")
+            ''' Determine the  category of letters here and separate'''
         
-        if word_dict[key].isupper():
-            key_caps.append(key)
-        elif word_dict[key].islower():
-            key_small.append(key)
-        elif word_dict[key].isdigit():
-            key_num.append(key)
-    print(f'keys: \nCaps: {key_caps}\nSmall: {key_small}\ndigit: {key_num} ')
+            if word_dict[key].isupper():
+                key_caps.append(key)
+            elif word_dict[key].islower():
+                key_small.append(key)
+            elif word_dict[key].isdigit():
+                key_num.append(key)
+        print(f'keys: \nCaps: {key_caps}\nSmall: {key_small}\ndigit: {key_num} ')
     
-    '''Get the  Capital letters from the dict using keys'''
-    arr_capital = ''
-    for j in key_caps:
-        arr_capital += word_dict[j]
-    #print(f'arr_capital:{arr_capital}')
+        '''Get the  Capital letters from the dict using keys'''
+        arr_capital = ''
+        for j in key_caps:
+            arr_capital += word_dict[j]
+        #print(f'arr_capital:{arr_capital}')
 
-    '''Get the small letters from the dict using the keys'''
-    arr_small = ''
-    for j in key_small:
-        arr_small += word_dict[j]
+        '''Get the small letters from the dict using the keys'''
+        arr_small = ''
+        for j in key_small:
+            arr_small += word_dict[j]
     
-    '''Get the Numbers from the dict using the keys'''
-    arr_number = ''
-    for j in key_num:
-        arr_number += word_dict[j]
+        '''Get the Numbers from the dict using the keys'''
+        arr_number = ''
+        for j in key_num:
+            arr_number += word_dict[j]
     
-    print (f"Caps: {arr_capital}, Small: {arr_small}, Number: {arr_number}")
+        print (f"Caps: {arr_capital}, Small: {arr_small}, Number: {arr_number}")
+
+    else:
+        if cp > 0 and sm == 0 and nu == 0:
+            arr_capital = msg
+            arr_small = ""
+            arr_number = ""
+        elif cp == 0 and sm > 0 and nu == 0:
+            arr_small = msg
+            arr_capital = ""
+            arr_number = ""
+        elif cp == 0 and sm == 0 and nu > 0:
+            arr_number = msg
+            arr_capital = ""
+            arr_small = ""
+
 
     '''##################### Main Encryption Process Start here ################### '''
 
     ''' Capital letters encryption process '''
-    
-    cap_x = arr_capital
-    # cap_x = 'HELLO'
+
+    if len(arr_capital) > 0:
+        cap_x = arr_capital
+        # cap_x = 'HELLO'
+    else:
+        cap_x = ""
+
     if len(cap_x) > 0:
         as_num = ""
         for j in cap_x:
@@ -150,11 +216,12 @@ def encryptStr():
         print(ord('a'), ord('z'))
     else:
         ''' TODO Retrun something else if cause arises'''
-        return None 
+        pass
 
     '''TODO Small Letter Encryption Process  TODO also check for 1 char and 2 char '''   
     
     small_x = arr_small
+    print(f"small_x: {small_x}")
     if len(small_x) > 0:
         call_small_func = small_letters.Small_Letter(small_x)
         #print(f'Small Letter: {call_small_func.encrypt_small_message()}, type: {type(call_small_func.encrypt_small_message())}')
@@ -186,7 +253,8 @@ def encryptStr():
 
 
     else:
-        return None
+        '''TODO return something else if any cause arises '''
+        pass
 
 
     '''TODO Numbers Encryption Process '''
@@ -210,7 +278,7 @@ def encryptStr():
         print(f'encrypted number: {num_enc}')
 
     else:
-        return None
+        pass
 
     
     ''' TODO return the counter or identity in order to decrypt the encrypted text  '''
@@ -219,39 +287,41 @@ def encryptStr():
     
     ''' Let the dict key be our public key on order to identify it and it should be the first one to be entered to identify '''
 
-    print(f'{key_caps, key_num, key_small}')  
-    key_caps_str, key_num_str, key_small_str = '', '', ''
-    for i in key_caps:
-        key_caps_str += str(i) + "-"
-    for i in key_num:
-        key_num_str += str(i) + "-"
-    for i in key_small:
-        key_small_str += str(i) + "-"
-    print(f'cap: {key_caps_str}, num: {key_num_str}, small: {key_small_str} ')  
-
-    ''' Let arrange the keys as in format [Alphabetic Character][Number] where 
-        Alphabetic Character : c => Upper Case keys
-        Alphabetic Character : n => Number format Keys
-        Alphabetic Character : s => Lower case Keys
-    '''
-    key_caps_str =  'c' + key_caps_str
-    key_num_str = 'n' + key_num_str
-    key_small_str = 's' + key_small_str
-
-   # print(f'encypted code=> caps: {key_caps_str}, num: {key_num_str}, small: {key_small_str}')
-
-    encrypted_key = key_caps_str + key_num_str + key_small_str
-    print(f'encrypted public key: {encrypted_key}')
+    if not flag: 
     
-    ''' Concat all  the encrypted text in such a way that it is easy to identify whether it is a for Capital, Small or Number '''
+        print(f'{key_caps, key_num, key_small}')  
+        key_caps_str, key_num_str, key_small_str = '', '', ''
+        for i in key_caps:
+            key_caps_str += str(i) + "-"
+        for i in key_num:
+            key_num_str += str(i) + "-"
+        for i in key_small:
+            key_small_str += str(i) + "-"
+        print(f'cap: {key_caps_str}, num: {key_num_str}, small: {key_small_str} ')  
 
-    print(f'encrypted capital: {enc}, encrtpted small: {small_enc}, encrypted number: {num_enc}')
+        ''' Let arrange the keys as in format [Alphabetic Character][Number] where 
+            Alphabetic Character : c => Upper Case keys
+            Alphabetic Character : n => Number format Keys
+            Alphabetic Character : s => Lower case Keys
+        '''
+        key_caps_str =  'c' + key_caps_str
+        key_num_str = 'n' + key_num_str
+        key_small_str = 's' + key_small_str
 
-    ''' encrypyted text should be concatenated using " - "  '''
+        # print(f'encypted code=> caps: {key_caps_str}, num: {key_num_str}, small: {key_small_str}')
 
-    final_encrypt = f'{enc}-{small_enc}-{num_enc}'
+        encrypted_key = key_caps_str + key_num_str + key_small_str
+        print(f'encrypted public key: {encrypted_key}')
+    
+        ''' Concat all  the encrypted text in such a way that it is easy to identify whether it is a for Capital, Small or Number '''
 
-    print("Whole encrypted word: {0}".format(final_encrypt))
+        print(f'encrypted capital: {enc}, encrtpted small: {small_enc}, encrypted number: {num_enc}')
+
+        ''' encrypyted text should be concatenated using " - "  '''
+
+        final_encrypt = f'{enc}-{small_enc}-{num_enc}'
+
+        print("Whole encrypted word: {0}".format(final_encrypt))
 
 
 
