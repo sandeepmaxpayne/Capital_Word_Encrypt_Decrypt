@@ -9,19 +9,22 @@ class Number_decryption:
         self.__decrypted_ascii = ''
         self.__decrypt_number = ''
         self.__default_num_ascii = 78
+        self.__number_secret_key = 0
 
     ''' decrypt number function callable '''    
     def decrypt_number_function(self):
         for i in self.encrypted_number_input:
             self.__get_ascii += str(ord(i))
-        #print(f'getAscii: {self.get_ascii}')
+       # print(f'getAscii: {self.__get_ascii}')
         split_num_2dig = re.findall(r'\d{2}', self.__get_ascii)
-        #print(f'splitascii: {split_num_2dig}')
+       # print(f'splitascii: {split_num_2dig}')
         for i in split_num_2dig[::-1]:
             self.__decrypted_ascii += str((int(i) - self.__default_num_ascii)) 
         split_decrypt_ascii = re.findall(r'\d{2}', self.__decrypted_ascii)
-        #print(f'decrypted ascii: {split_decrypt_ascii}')
+       # print(f'decrypted ascii: {split_decrypt_ascii}')
         for i in split_decrypt_ascii:
             self.__decrypt_number += chr(int(i))
-        #print(f'decrypted number: {self.decrypt_number}')
-        return self.__decrypt_number
+        # print(f'decrypted number: {self.decrypt_number}')
+
+        self.__number_secret_key = int("".join(split_decrypt_ascii))
+        return (self.__decrypt_number, self.__number_secret_key)

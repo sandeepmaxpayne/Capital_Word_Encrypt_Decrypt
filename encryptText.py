@@ -12,14 +12,14 @@ import number
 
 
 '''
-    TODO
     Limitations 
     Only Capitals Words, or ,
     Only Small Words, or ,
     Only Numbers, or ,
     Must be a combination of capital word, small word and numbers
-    
-    
+    For secret key get the individual secret key for the encrypted capitals, smalls, numbers 
+    For the combination of capital, small and number first get each of their individual sceret key
+    and finally the xor each of the individual keys
  '''
 
 
@@ -55,14 +55,20 @@ def number_system_127(number_value):
    
 
 
-def encryptStr():
+def encryptStr(input_msg):
     '''# sm_x = small_letters.Small_Letter('halo')
     # y = sm_x.encrypt_small_message()
     # print(y)
 '''
+
+    '''Initialize all the secret keys '''
+    secret_key_capital = 0
+    secret_key_small = 0
+    secret_key_num = 0
+
     
     # msg = input('enter message: ')
-    msg = '8709456537'
+    msg = input_msg
 
     ''' Check if the input word is Neither only capital nor only small nor only number then go further else go for single checking'''
     flag = False # use to check only num, only small char, only cap if flag = True
@@ -200,6 +206,7 @@ def encryptStr():
             shortMsg = Short_Message(msg)
             enc = shortMsg.encrypt_single_msg()
             print("encrypted text: ", enc)
+           
 
         else:
             enc = enc1 + enc2[::-1]
@@ -207,13 +214,14 @@ def encryptStr():
         ''' symmetric key of 1st second array value using xor operation'''
         
         ''' Calculating the secret key simply '''
-        key = 0
         xor_strbb1 = [int(getstrbb1[0])] + [int(strbb1[1])]
         print(f'xor_strbb1: {xor_strbb1}')
         for i in xor_strbb1:
-            key ^= int(i)
-        print("secret key: ", key)
-        print(ord('a'), ord('z'))
+            secret_key_capital ^= int(i)
+        print("secret key: ", secret_key_capital)
+
+        # return (enc, secret_key_capital)
+        
     else:
         ''' TODO Retrun something else if cause arises'''
         pass
@@ -235,7 +243,7 @@ def encryptStr():
         ''' For calc_num_127[index1] excluding counter value extract each value and add it to 97 as of ascending order '''
 
         small_enc1, small_enc2 = "", ""
-        print(calc_num_127)
+        print(f"calc_num_127: {calc_num_127}")
         print(calc_num_127[0].split('-')[0])
         for k in calc_num_127[0].split('-')[0]:
             small_enc1 += chr(97 + int(k))
@@ -251,13 +259,21 @@ def encryptStr():
         small_enc = small_enc1 + small_enc2[::-1]
         print(f'encrypted small letters: {small_enc}')
 
+        '''Calculate the key like 53.5 i.e. base127(53) xor base127(5)'''
+        
+        
+        secret_key_small = int(calc_num_127[0].split('-')[0]) ^ int(calc_num_127[1])
+        print("secret key small: ", secret_key_small)
+
+        # return (small_enc, secret_key_small)
+
 
     else:
         '''TODO return something else if any cause arises '''
         pass
 
 
-    '''TODO Numbers Encryption Process '''
+    '''Numbers Encryption Process '''
 
     number_x = arr_number
     if len(number_x) > 0:
@@ -277,6 +293,14 @@ def encryptStr():
             num_enc += chr(78 + int(k))
         print(f'encrypted number: {num_enc}')
 
+
+        ''' calculate key but weak in number encryption because the key is the encrypted number '''
+        secret_key_num = call_num_func
+        print(f"Secret Key Num: {secret_key_num}")
+
+      
+
+
     else:
         pass
 
@@ -287,8 +311,7 @@ def encryptStr():
     
     ''' Let the dict key be our public key on order to identify it and it should be the first one to be entered to identify '''
 
-    if not flag: 
-    
+    if not flag:
         print(f'{key_caps, key_num, key_small}')  
         key_caps_str, key_num_str, key_small_str = '', '', ''
         for i in key_caps:
@@ -310,8 +333,8 @@ def encryptStr():
 
         # print(f'encypted code=> caps: {key_caps_str}, num: {key_num_str}, small: {key_small_str}')
 
-        encrypted_key = key_caps_str + key_num_str + key_small_str
-        print(f'encrypted public key: {encrypted_key}')
+        encrypted_text_order = key_caps_str + key_num_str + key_small_str
+        print(f'Encrypted text order mapping: {encrypted_text_order}')
     
         ''' Concat all  the encrypted text in such a way that it is easy to identify whether it is a for Capital, Small or Number '''
 
@@ -323,6 +346,27 @@ def encryptStr():
 
         print("Whole encrypted word: {0}".format(final_encrypt))
 
+        ''' Calculate the xor for all the three xor keys using the xor operation '''
 
+        print(f"secret Keys: secret_key_small: {secret_key_small}, secrret_key_capital: {secret_key_capital}, secret_key_num: {secret_key_num}")
+        combined_secret_key = int(secret_key_small) ^ int(secret_key_capital) ^ int(secret_key_num)
 
-encryptStr()
+        print(f"Combined Secret key: {combined_secret_key}")
+        return (final_encrypt, combined_secret_key, encrypted_text_order)
+    
+    else:
+        print(f'Encrypted text order mapping: {None}')
+        encrypted_text_order = None
+        
+     #   print(f'encrypted cap: {enc}, encrypted number: {num_enc}, encrypted small :{small_enc}')
+        
+        if len(msg).__eq__(cp):
+            return (enc, secret_key_capital, encrypted_text_order)
+        elif len(msg).__eq__(sm):
+            return (small_enc, secret_key_small, encrypted_text_order)
+        elif len(msg).__eq__(nu):
+            return (num_enc, secret_key_num, encrypted_text_order)
+       
+       
+
+# encryptStr()

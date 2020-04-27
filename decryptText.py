@@ -1,6 +1,7 @@
 import re
 import os
 import sys
+import time
 
 script_path = "calculate_decrypt/"
 
@@ -24,11 +25,18 @@ class Decrypt_Single_Message:
 def number_system_127(decimal_number):
     pass
 
-def decryptText():
+def decryptText(encrypted_text, secret_keys, encrypted_order):
     '''TODO input of encrypted text '''
 
-    complex_encrypted_text = 'SSOSQSRSQSPSUSVRSSTS'
-    secret_key = 7737144222556
+    '''Find out the decrypted secret key'''
+    decrypted_secret_key_small = 0
+    decrypted_secret_key_capital = 0
+    decrypted_secret_key_number = 0
+
+   # complex_encrypted_text = 'GJAF2QTTUVTVWRXXW-gii4vrwstxutrsvxq-PSOSNSWR'
+   # secret_key = 8942243274196
+    complex_encrypted_text = encrypted_text
+    secret_key = secret_keys
     separate_complex = complex_encrypted_text.split('-')
     print(f'compex separated: {separate_complex}')
 
@@ -85,7 +93,7 @@ def decryptText():
    # encrp_text = input("Enter the encrypted text: ")
     # capital_encrp_text = 'DFEJ4UYTYSSQWUSXZ'
     #secret_key = int(input("Enter secret key: "))
-    
+    txt = ""
     if len(capital_encrp_text) > 0:
         iter = re.findall(r'\d+', capital_encrp_text)
         x = re.split(r'\d+', capital_encrp_text)
@@ -138,49 +146,68 @@ def decryptText():
 
             print(f'exact key: {exact_key}')
             # print(iter)
+            decrypted_secret_key_capital = exact_key
+           
+            if iter > 1:
+                for j in range(iter-1):
+                    s = value
+                    s1 = 127 * s
+                    value = s1
+            else:
+                s1 = value
+
+            # print(s1)
+            # print(type(s1))
+            value = int(s1)
+            print(f'value: {value}')
+            y = re.findall(r'\d{2}', str(value))
+            print(f'y: {y}')
+
+            for k in y:
+                txt += chr(int(k))
+
             if exact_key.__eq__(secret_key):
                 print("Secrect Key is Correct")
                 print("Decrypting Data.......")
-                if iter > 1:
-                    for j in range(iter-1):
-                        s = value
-                        s1 = 127 * s
-                        value = s1
-                else:
-                    s1 = value
-
-                # print(s1)
-                # print(type(s1))
-                value = int(s1)
-                print(f'value: {value}')
-                y = re.findall(r'\d{2}', str(value))
-                print(f'y: {y}')
-
-                txt = ""
-                for k in y:
-                    txt += chr(int(k))
+                time.sleep(2.0)
+               
                 print("decrpted text: ", txt)
 
             else:
 
-                print(ErrRed("Invalid secret key cannot be decrypted!!!"))
+                print("Invalid secret key cannot be decrypted!!!")
 
     '''TODO Decrypt the small letter encypted text '''
     if len(small_encrypted_input) > 0:
         decrypt_small_text = decryptSmall.DecryptSmallLetter(small_encrypted_input).decrypt_small()
-        print(f'decrypted small text: {decrypt_small_text}')
+        decrypted_secret_key_small = decrypt_small_text[1]
+        if decrypt_small_text[1].__eq__(secret_key):
+            print('Secret key is correct')
+            print('Decrypting small text ....')
+            time.sleep(2)
+            print(f'decrypted small text: {decrypt_small_text[0]}')
+        else:
+            print("Sorry incorrect secret key entered")
 
     '''TODO Decrypt the encrypted number  '''
     if len(number_encrypted_input) > 0:
         decrypt_number_str = decrypt_number.Number_decryption(number_encrypted_input).decrypt_number_function()
-        print(f'decrypted number:  {decrypt_number_str}')
-
+        decrypted_secret_key_number = decrypt_number_str[1]
+        if decrypt_number_str[1].__eq__(secret_key):
+            print("Secret Key is correct")
+            print("Decrypting number .......")
+            time.sleep(2)
+            print(f'decrypted number:  {decrypt_number_str[0]}')
+        else:
+            print("Incorrect Secret key.")
+            print("Access Denied")
     '''TODO Arrange the order of all decryoted letter and number using the decrypted order dictionary order : Capital + Num + Small '''
     
     if not flag:
         ''' Get the encrypyted order key dictionary '''
-        # encrypted_order_key = 'c0123456n11s78910'
-        encrypted_order_key = 'c0-7-10-n14-15-16-s1-2-3-4-5-6-8-9-11-12-13'
+        # encrypted_order_key_mapping = 'c0-1-2-n6-7-8-9-s3-4-5-10-11-'
+        encrypted_order_key_mapping = encrypted_order
+        encrypted_order_key = encrypted_order_key_mapping
         decrypted_order_key_dict = decrypt_order_key.OrderKey(encrypted_order_key).decryptOrderKey()
         print(f'decrypted order key dict: {decrypted_order_key_dict}')
     
@@ -202,7 +229,7 @@ def decryptText():
 
         decrypted_capital_txt = txt
         print(f'decrypted capital text: {decrypted_capital_txt}, decrypted small text: {decrypt_small_text}, decrypted number: {decrypt_number_str}')
-        order_decrypt_word = decrypted_capital_txt + decrypt_number_str + decrypt_small_text
+        order_decrypt_word = decrypted_capital_txt + decrypt_number_str[0] + decrypt_small_text[0]
         print(f'ordered decrypted word: {order_decrypt_word}')
 
     
@@ -211,15 +238,38 @@ def decryptText():
         print(f'dict: {arr_decrypt_dict}')
     
 
+        '''Calculate the combined decrypted secret key '''
+        decrypted_combined_key = decrypted_secret_key_capital ^ decrypted_secret_key_number ^ decrypted_secret_key_small
+        print(f"decrypted combined key: {decrypted_combined_key}")
+
         '''Get the decrypted text '''
         print(len(arr_decrypt_dict))
         decrypted_text = ''
         for key in range(len(arr_decrypt_dict)):
             if key.__eq__(arr_decrypt_dict[f'{key}']):
                 decrypted_text += arr_decrypt_dict[f'{key}']
-        print(f'Decrypted Text: {decrypted_text}')  
+
+        ''' Compare the combined secret key if matches then get the result otherwise none '''
+        if secret_key.__eq__(decrypted_combined_key):
+            print('secret key is correct')
+            print('fething the decrypted text ....')
+            print(f'Decrypted Text: {decrypted_text}')
+
+            return decrypted_text
+        else:
+            print(ErrRed('incorrect combined secret key.'))
+            return "Incorrect combined key"  
+    
+    else: 
+        if countsmall.__eq__(len(separate_complex[0]) - 1):
+            return decrypt_small_text[0]
+        elif countcapital.__eq__(len(separate_complex[0]) - 1):
+            return txt
+        elif countcapital.__eq__(len(separate_complex[0])):
+            return decrypt_number_str[0]
+
 
    
     
 
-decryptText()
+#decryptText()
