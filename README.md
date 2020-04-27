@@ -13,6 +13,14 @@ To run :
 
 # Limitations
 
+    Only Capitals Words, or ,
+    Only Small Words, or ,
+    Only Numbers, or ,
+    Must be a combination of capital word, small word and numbers
+    For secret key get the individual secret key for the encrypted capitals, smalls, numbers 
+    For the combination of capital, small and number first get each of their individual sceret key
+    and finally the xor each of the individual keys
+    Length of word should be 3 or greater. [Due to 127 number system the ascii value generated must be greater than 127 and is only achieved by the word of length 3 and more]
 
 
 # Algorithm Explanation
