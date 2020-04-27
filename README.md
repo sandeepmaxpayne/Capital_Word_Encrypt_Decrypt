@@ -1,4 +1,4 @@
-# Encypt and Decrypt Capital Words using Logical Number System [COLLEGE PROJECT]
+# Encypt and Decrypt Capital Words using Logical Number System [COLLEGE Final Year PROJECT]
 
 <b><ul>This is a simple encryption and decrption algorithm for Capital or Lower Case alphabetic Characters</ul></b>
 
