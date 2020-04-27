@@ -38,7 +38,7 @@ def decryptText(encrypted_text, secret_keys, encrypted_order):
     complex_encrypted_text = encrypted_text
     secret_key = secret_keys
     separate_complex = complex_encrypted_text.split('-')
-    print(f'compex separated: {separate_complex}')
+   # print(f'compex separated: {separate_complex}')
 
     # small_encrypted_input = 'gjd3yssurvurrxvsx'
     # number_encrypted_input = 'VR'
@@ -84,7 +84,7 @@ def decryptText(encrypted_text, secret_keys, encrypted_order):
             small_encrypted_input = ""
             capital_encrp_text = ""
         
-        print(f'cap_encypted: {capital_encrp_text}, small_encrypted: {small_encrypted_input}, number_encrypted: {number_encrypted_input}')
+       # print(f'cap_encypted: {capital_encrp_text}, small_encrypted: {small_encrypted_input}, number_encrypted: {number_encrypted_input}')
   
    
     ErrRed = lambda x: '\033[31m' + str(x)
@@ -97,7 +97,7 @@ def decryptText(encrypted_text, secret_keys, encrypted_order):
     if len(capital_encrp_text) > 0:
         iter = re.findall(r'\d+', capital_encrp_text)
         x = re.split(r'\d+', capital_encrp_text)
-        print(f' iteration : {x}, {iter}')
+       # print(f' iteration : {x}, {iter}')
 
         ''' TODO Decrypt the capital encypted text'''
         #print(iter)
@@ -159,9 +159,9 @@ def decryptText(encrypted_text, secret_keys, encrypted_order):
             # print(s1)
             # print(type(s1))
             value = int(s1)
-            print(f'value: {value}')
+           # print(f'value: {value}')
             y = re.findall(r'\d{2}', str(value))
-            print(f'y: {y}')
+           # print(f'y: {y}')
 
             for k in y:
                 txt += chr(int(k))
@@ -169,7 +169,7 @@ def decryptText(encrypted_text, secret_keys, encrypted_order):
             if exact_key.__eq__(secret_key):
                 print("Secrect Key is Correct")
                 print("Decrypting Data.......")
-                time.sleep(2.0)
+                time.sleep(0.5)
                
                 print("decrpted text: ", txt)
 
@@ -184,7 +184,7 @@ def decryptText(encrypted_text, secret_keys, encrypted_order):
         if decrypt_small_text[1].__eq__(secret_key):
             print('Secret key is correct')
             print('Decrypting small text ....')
-            time.sleep(2)
+            time.sleep(0.5)
             print(f'decrypted small text: {decrypt_small_text[0]}')
         else:
             print("Sorry incorrect secret key entered")
@@ -196,7 +196,7 @@ def decryptText(encrypted_text, secret_keys, encrypted_order):
         if decrypt_number_str[1].__eq__(secret_key):
             print("Secret Key is correct")
             print("Decrypting number .......")
-            time.sleep(2)
+            time.sleep(0.5)
             print(f'decrypted number:  {decrypt_number_str[0]}')
         else:
             print("Incorrect Secret key.")
@@ -223,14 +223,14 @@ def decryptText(encrypted_text, secret_keys, encrypted_order):
         small_order.pop(1)
     
     
-        print(f'cap_order: {cap_order[0]}, num_order: {num_order}, small_order: {small_order}')
+      #  print(f'cap_order: {cap_order[0]}, num_order: {num_order}, small_order: {small_order}')
         order_dictionary = cap_order + num_order + small_order
-        print(f'order dictionary: {order_dictionary}')
+       # print(f'order dictionary: {order_dictionary}')
 
         decrypted_capital_txt = txt
-        print(f'decrypted capital text: {decrypted_capital_txt}, decrypted small text: {decrypt_small_text}, decrypted number: {decrypt_number_str}')
+       # print(f'decrypted capital text: {decrypted_capital_txt}, decrypted small text: {decrypt_small_text}, decrypted number: {decrypt_number_str}')
         order_decrypt_word = decrypted_capital_txt + decrypt_number_str[0] + decrypt_small_text[0]
-        print(f'ordered decrypted word: {order_decrypt_word}')
+       # print(f'ordered decrypted word: {order_decrypt_word}')
 
     
         ''' Get the arranged Dictionary '''

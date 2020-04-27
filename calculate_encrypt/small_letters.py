@@ -18,20 +18,20 @@ class Small_Letter:
         for i in msg:
             conv = ord(i)
             self.__conv_list.append(conv)
-        print(self.__conv_list)
+      #  print(self.__conv_list)
         for i in self.__conv_list:
             if len(str(i)).__eq__(3):
                 x = str(i)
                 ''' take the first two number one side and last two number other side '''
                 x_first_two_dig = x[:2]
                 x_last_dig = x[-1]
-                print(x_first_two_dig, x_last_dig)
+       #         print(x_first_two_dig, x_last_dig)
                 ''' get the sum of first two number '''
                 x_fdig_sum = sum([int(j) for j in x_first_two_dig])
-                print(x_fdig_sum)
+        #        print(x_fdig_sum)
                 '''concate the x_fdig_sum with the x_last_dig'''
                 concat_x = str(x_fdig_sum) + x_last_dig
-                print(f'concated 3 digit to 2 digit: {concat_x}')
+         #       print(f'concated 3 digit to 2 digit: {concat_x}')
 
                 self.__conv_and_concat.append(concat_x)
 
@@ -43,8 +43,4 @@ class Small_Letter:
        
       
         return "".join(self.__conv_and_concat)
-
-# def small():
-#     x = Small_Letter('hello')
-#     print(x.encrypt_small_message())
-# small()
+        

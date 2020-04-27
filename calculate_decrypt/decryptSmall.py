@@ -18,12 +18,12 @@ class DecryptSmallLetter():
     def decrypt_small(self):
        # encrpted_small_text = 'gjd3yssurvurrxvsx'
         encrpted_small_text = self.input_encrypted_small
-        print(encrpted_small_text)
+       # print(encrpted_small_text)
         encryp_x = re.split(r'\d', encrpted_small_text)
-        print(f'smallencyrpt: {encryp_x}')
+       # print(f'smallencyrpt: {encryp_x}')
         ''' Count the number  '''
         iter_count = re.findall(r'\d+', encrpted_small_text)
-        print(f'iter count: {iter_count}')
+       # print(f'iter count: {iter_count}')
         ''' Reverse the [index 2] encrypted text'''
         rev_small_encry_x = encryp_x[1][::-1]
         #print(f'reversed index 2: {rev_small_encry_x}') 
@@ -35,14 +35,14 @@ class DecryptSmallLetter():
             start = 97
             start_decrypt = ord(i)
             self.__decrypt_index1 += str(start_decrypt - start)
-        print(f'decrypt_index1: {self.__decrypt_index1}') 
+       # print(f'decrypt_index1: {self.__decrypt_index1}') 
 
         ''' Decrypt the second encrypted index charcaters in reversed order'''
         for i in rev_small_encry_x:
             last = 122
             rev_decrypt = ord(i)
             self.__decrypt_index2 += str(last - rev_decrypt)
-        print(f'decrptedindex2: {self.__decrypt_index2}')
+       # print(f'decrptedindex2: {self.__decrypt_index2}')
 
         '''Form the original decimal value of 127 numbeer system '''
         decrypt_value = float(f'{self.__decrypt_index1}.{self.__decrypt_index2}')
@@ -56,11 +56,11 @@ class DecryptSmallLetter():
         else:
             '''TODO for iter < 2 if any '''
             s1 = int(decrypt_value)
-        print(f'float value: {s1}')
+       # print(f'float value: {s1}')
         decrypt_value = s1
-        print(f'decrypted value: {decrypt_value}, type: {type(decrypt_value)}')
+       # print(f'decrypted value: {decrypt_value}, type: {type(decrypt_value)}')
         y = re.findall(r'\d{2}', str(decrypt_value))
-        print(f' list y val: {y}, type[index0]:{type(y[0])}')
+       # print(f' list y val: {y}, type[index0]:{type(y[0])}')
 
         '''Arrange the single digit number of pos0 to 2 digit number '''
         for j in y:
@@ -72,7 +72,7 @@ class DecryptSmallLetter():
                 self.__decrpt_ascii.append(f'12{j[1]}')
             else:
                 self.__decrpt_ascii.append(j)
-        print(f'decrpt_ascii: {self.__decrpt_ascii}')
+       # print(f'decrpt_ascii: {self.__decrpt_ascii}')
         decrpted_small_txt = ''
         for i in self.__decrpt_ascii:
             decrpted_small_txt += chr(int(i))

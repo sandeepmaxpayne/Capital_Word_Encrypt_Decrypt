@@ -43,13 +43,13 @@ def number_system_127(number_value):
         bb1 = number_value
         number_value = number_value / 127
     #print(r, c, bb1, s)
-    print(f'count: {c}')
+   # print(f'count: {c}')
     strbb1 = str(bb1)
     strbb1 = strbb1.split(".")
     #print(strbb1)
     ''' Add the counter at end of index0'''
     strbb1[0] += "-" + str(c)
-    print(f'function strbb1: {strbb1}')
+   # print(f'function strbb1: {strbb1}')
     ''' return [(Integer Value index1 + counter value), Integer Value index2] '''
     return strbb1
    
@@ -80,7 +80,7 @@ def encryptStr(input_msg):
             cp += 1
         elif i.isdigit():
             nu += 1
-    print(f'count cap: {cp}, count small: {sm}, count number: {nu}')
+   # print(f'count cap: {cp}, count small: {sm}, count number: {nu}')
 
     if len(msg).__eq__(cp):
         flag = True
@@ -100,7 +100,7 @@ def encryptStr(input_msg):
             xx.append(i)
             yy.append(j)
         word_dict = dict(zip(xx, yy))
-        print(f"word dictionary: {word_dict} length: {len(word_dict)}")
+        #print(f"word dictionary: {word_dict} length: {len(word_dict)}")
 
 
     # x = msg.split()
@@ -111,7 +111,7 @@ def encryptStr(input_msg):
         '''Key Mapping based on a particular word'''
         key_caps, key_small, key_num = [], [], []
         for key in word_dict:
-            print(f"key: {key} val: {word_dict[key]}")
+            #print(f"key: {key} val: {word_dict[key]}")
             ''' Determine the  category of letters here and separate'''
         
             if word_dict[key].isupper():
@@ -120,7 +120,7 @@ def encryptStr(input_msg):
                 key_small.append(key)
             elif word_dict[key].isdigit():
                 key_num.append(key)
-        print(f'keys: \nCaps: {key_caps}\nSmall: {key_small}\ndigit: {key_num} ')
+        #print(f'keys: \nCaps: {key_caps}\nSmall: {key_small}\ndigit: {key_num} ')
     
         '''Get the  Capital letters from the dict using keys'''
         arr_capital = ''
@@ -138,7 +138,7 @@ def encryptStr(input_msg):
         for j in key_num:
             arr_number += word_dict[j]
     
-        print (f"Caps: {arr_capital}, Small: {arr_small}, Number: {arr_number}")
+      #  print (f"Caps: {arr_capital}, Small: {arr_small}, Number: {arr_number}")
 
     else:
         if cp > 0 and sm == 0 and nu == 0:
@@ -165,7 +165,7 @@ def encryptStr(input_msg):
     else:
         cap_x = ""
 
-    if len(cap_x) > 0:
+    if len(cap_x) > 2:
         as_num = ""
         for j in cap_x:
             ''' Get the letter ascii value and concat it by following next ascii value '''
@@ -205,7 +205,7 @@ def encryptStr(input_msg):
         if len(msg).__eq__(1):
             shortMsg = Short_Message(msg)
             enc = shortMsg.encrypt_single_msg()
-            print("encrypted text: ", enc)
+           # print("encrypted text: ", enc)
            
 
         else:
@@ -215,7 +215,7 @@ def encryptStr(input_msg):
         
         ''' Calculating the secret key simply '''
         xor_strbb1 = [int(getstrbb1[0])] + [int(strbb1[1])]
-        print(f'xor_strbb1: {xor_strbb1}')
+       # print(f'xor_strbb1: {xor_strbb1}')
         for i in xor_strbb1:
             secret_key_capital ^= int(i)
         print("secret key: ", secret_key_capital)
@@ -224,36 +224,37 @@ def encryptStr(input_msg):
         
     else:
         ''' TODO Retrun something else if cause arises'''
+      
         pass
 
     '''TODO Small Letter Encryption Process  TODO also check for 1 char and 2 char '''   
     
     small_x = arr_small
-    print(f"small_x: {small_x}")
-    if len(small_x) > 0:
+   # print(f"small_x: {small_x}")
+    if len(small_x) > 2:
         call_small_func = small_letters.Small_Letter(small_x)
         #print(f'Small Letter: {call_small_func.encrypt_small_message()}, type: {type(call_small_func.encrypt_small_message())}')
         call_small_func_toInt = int(call_small_func.encrypt_small_message())
         calc_num_127 = number_system_127(call_small_func_toInt)
         ''' Converted to num 127 format using 127 bit number system value and split the decimal value'''
-        print(f'calculate num 127: {calc_num_127}')
+       # print(f'calculate num 127: {calc_num_127}')
         counter_value = calc_num_127[0].split('-')[1]
-        print(f'counter value: {counter_value}')
+       # print(f'counter value: {counter_value}')
 
         ''' For calc_num_127[index1] excluding counter value extract each value and add it to 97 as of ascending order '''
 
         small_enc1, small_enc2 = "", ""
-        print(f"calc_num_127: {calc_num_127}")
-        print(calc_num_127[0].split('-')[0])
+       # print(f"calc_num_127: {calc_num_127}")
+       # print(calc_num_127[0].split('-')[0])
         for k in calc_num_127[0].split('-')[0]:
             small_enc1 += chr(97 + int(k))
         small_enc1 += str(counter_value)
-        print(f'small_enc1: {small_enc1}')
+       # print(f'small_enc1: {small_enc1}')
 
         ''' For calc_num_127[index2] extract each value and subtract it from 122 to be in reverse order '''
         for k in calc_num_127[1]:
             small_enc2 += chr(122 - int(k))
-        print(f'small_enc2: {small_enc2}, sameLength: {len(small_enc2).__eq__(len(calc_num_127[1]))}') 
+       # print(f'small_enc2: {small_enc2}, sameLength: {len(small_enc2).__eq__(len(calc_num_127[1]))}') 
 
         ''' Concat the two small_enc generated value such that second small_enc is in reverse order '''
         small_enc = small_enc1 + small_enc2[::-1]
@@ -279,7 +280,7 @@ def encryptStr(input_msg):
     if len(number_x) > 0:
         number_func = number.Number(number_x)
         call_num_func = number_func.encrypt_number()
-        print(f'call_num_func: {call_num_func}')
+      #  print(f'call_num_func: {call_num_func}')
          
         ''' For the number encryption
             1. Reverse the acii value of the number
@@ -312,7 +313,7 @@ def encryptStr(input_msg):
     ''' Let the dict key be our public key on order to identify it and it should be the first one to be entered to identify '''
 
     if not flag:
-        print(f'{key_caps, key_num, key_small}')  
+       # print(f'{key_caps, key_num, key_small}')  
         key_caps_str, key_num_str, key_small_str = '', '', ''
         for i in key_caps:
             key_caps_str += str(i) + "-"
@@ -320,7 +321,7 @@ def encryptStr(input_msg):
             key_num_str += str(i) + "-"
         for i in key_small:
             key_small_str += str(i) + "-"
-        print(f'cap: {key_caps_str}, num: {key_num_str}, small: {key_small_str} ')  
+       # print(f'cap: {key_caps_str}, num: {key_num_str}, small: {key_small_str} ')  
 
         ''' Let arrange the keys as in format [Alphabetic Character][Number] where 
             Alphabetic Character : c => Upper Case keys
@@ -348,7 +349,7 @@ def encryptStr(input_msg):
 
         ''' Calculate the xor for all the three xor keys using the xor operation '''
 
-        print(f"secret Keys: secret_key_small: {secret_key_small}, secrret_key_capital: {secret_key_capital}, secret_key_num: {secret_key_num}")
+       # print(f"secret Keys: secret_key_small: {secret_key_small}, secrret_key_capital: {secret_key_capital}, secret_key_num: {secret_key_num}")
         combined_secret_key = int(secret_key_small) ^ int(secret_key_capital) ^ int(secret_key_num)
 
         print(f"Combined Secret key: {combined_secret_key}")
