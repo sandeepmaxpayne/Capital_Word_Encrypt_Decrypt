@@ -58,5 +58,5 @@ This project is limited only to words and not to sentence.
 <p>The project is released under <a href="https://github.com/sandeepmaxpayne/Capital_Word_Encrypt_Decrypt/blob/master/LICENSE">MIT License</a></p>
 
 <h2> To test this with n number of words test.py is written for that </h2>
-<p>Test the code<a>href="https://github.com/sandeepmaxpayne/Capital_Word_Encrypt_Decrypt/blob/master/test.py"</a></p>
+<p>Test the code: <a href="https://github.com/sandeepmaxpayne/Capital_Word_Encrypt_Decrypt/blob/master/test.py">Test.py</a></p>
 
