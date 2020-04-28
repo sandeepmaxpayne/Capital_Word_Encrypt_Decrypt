@@ -11,6 +11,17 @@ To run :
 
     use the command as "python decryptText.py" in command prompt
 
+# Limitations
+
+    Only Capitals Words, or ,
+    Only Small Words, or ,
+    Only Numbers, or ,
+    Must be a combination of capital word, small word and numbers
+    For secret key get the individual secret key for the encrypted capitals, smalls, numbers 
+    For the combination of capital, small and number first get each of their individual sceret key
+    and finally the xor each of the individual keys
+    Length of word should be 3 or greater. [Due to 127 number system the ascii value generated must be greater than 127 and is only achieved by the word of length 3 and more]
+
 
 # Algorithm Explanation
 
@@ -54,4 +65,6 @@ This project is limited only to words and not to sentence.
 
 <p>The project is released under <a href="https://github.com/sandeepmaxpayne/Capital_Word_Encrypt_Decrypt/blob/master/LICENSE">MIT License</a></p>
 
+<h2> To test this with n number of words test.py is written for that </h2>
+<p>Test the code: <a href="https://github.com/sandeepmaxpayne/Capital_Word_Encrypt_Decrypt/blob/master/test.py">Test.py</a></p>
 
