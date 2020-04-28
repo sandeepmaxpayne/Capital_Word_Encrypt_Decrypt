@@ -124,5 +124,11 @@ The decryption process will be the reverse procedure of encrypted one. But in re
 <p>The project is released under <a href="https://github.com/sandeepmaxpayne/Capital_Word_Encrypt_Decrypt/blob/master/LICENSE">MIT License</a></p>
 
 <h2> To test this with n number of words test.py is written for that </h2>
+
+``` To run this on terminal
+use python test_app.py 
+after entering the dir /Capital_Word_Encrypt_Decrypt
+```
+
 <p>Test the code: <a href="https://github.com/sandeepmaxpayne/Capital_Word_Encrypt_Decrypt/blob/master/test_app.py">Test_app.py</a></p>
 
