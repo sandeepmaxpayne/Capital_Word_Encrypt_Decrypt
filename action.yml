@@ -1,11 +1,12 @@
-# action.yml
-name: 'Characters Encrypt and Decrypt '
-description: 'Encrypt and Decrypt using number system and logical operations'
+name: 'Unit Testing With Python'
+author: 'Sandeep Dutta'
+description: 'To test the python test file via git'
+inputs:
+  src:
+    description: 'Always push your code and test case file as name.py and test_name.py'
 runs:
   using: 'docker'
   image: 'Dockerfile'
-  
 branding:
-  icon: 'none'  
-  color: green
-  
+  icon: 'award'
+  color: 'green'
