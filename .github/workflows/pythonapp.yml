@@ -36,4 +36,5 @@ jobs:
         pip install termcolor
     - name: Test with pytest
       run: |
-        pytest
+        pip install pytest
+        python -m pytest
