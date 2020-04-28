@@ -5,8 +5,8 @@ from termcolor import colored
 ''' Each words makes a sentence'''
 
 def test():
-   # sentence = "HELLO SANDY where have you been and whats YOUR PHONE NUMBER 1234567890 code HeL458LonEmjdhf THERE WAS CAT under the BED ofcCOodeE1237 "
-    sentences = input("Enter sentence:")
+    sentences = "HELLO SANDY where have you been and whats YOUR PHONE NUMBER 1234567890 code HeL458LonEmjdhf THERE WAS CAT under the BED ofcCOodeE1237 "
+    # sentences = input("Enter sentence:")
     sentences = sentences.rstrip(" ").lstrip(" ").split(" ")
     sentence = []
     for i in sentences:
