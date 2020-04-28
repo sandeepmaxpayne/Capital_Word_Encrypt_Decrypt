@@ -116,14 +116,13 @@ The decryption process will be the reverse procedure of encrypted one. But in re
 
 <h2>Decrypting the Capital letters</h2>
 <br>
-```
-<p>Here in case of capital it is the reverse process of encrypting the capital letters. Just multiply the base(127) with the number of iterations that was required to encrypt the capital letters.</p>
 
-```
+```<p>Here in case of capital it is the reverse process of encrypting the capital letters. Just multiply the base(127) with the number of iterations that was required to encrypt the capital letters.</p>```
+
 <h2>License</h2>
 
 <p>The project is released under <a href="https://github.com/sandeepmaxpayne/Capital_Word_Encrypt_Decrypt/blob/master/LICENSE">MIT License</a></p>
 
 <h2> To test this with n number of words test.py is written for that </h2>
-<p>Test the code: <a href="https://github.com/sandeepmaxpayne/Capital_Word_Encrypt_Decrypt/blob/master/test_app.py">Test.py</a></p>
+<p>Test the code: <a href="https://github.com/sandeepmaxpayne/Capital_Word_Encrypt_Decrypt/blob/master/test_app.py">Test_app.py</a></p>
 
