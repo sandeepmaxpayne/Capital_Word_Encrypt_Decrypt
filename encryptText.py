@@ -1,7 +1,7 @@
 import math
-
 import os
 import sys
+from termcolor import colored
 
 scriptpath = "calculate_encrypt/"
 
@@ -34,6 +34,7 @@ class Short_Message:
         return self.message
 
 def number_system_127(number_value):
+   
     c, bb1 = 0, 0
     s = ""
     while round(number_value) > 127:
@@ -56,10 +57,6 @@ def number_system_127(number_value):
 
 
 def encryptStr(input_msg):
-    '''# sm_x = small_letters.Small_Letter('halo')
-    # y = sm_x.encrypt_small_message()
-    # print(y)
-'''
 
     '''Initialize all the secret keys '''
     secret_key_capital = 0
@@ -165,6 +162,7 @@ def encryptStr(input_msg):
     else:
         cap_x = ""
 
+    '''TODO For Encrypting Capital letters of length 1 and length 2 '''
     if len(cap_x) > 2:
         as_num = ""
         for j in cap_x:
@@ -205,7 +203,8 @@ def encryptStr(input_msg):
         if len(msg).__eq__(1):
             shortMsg = Short_Message(msg)
             enc = shortMsg.encrypt_single_msg()
-           # print("encrypted text: ", enc)
+            print("encrypted text: ", enc)
+            return enc
            
 
         else:
@@ -223,9 +222,7 @@ def encryptStr(input_msg):
         # return (enc, secret_key_capital)
         
     else:
-        ''' TODO Retrun something else if cause arises'''
-      
-        pass
+        print(colored('Capital word must be of minimum size 3. Due to complexity issue capital word size less than length 3 is not implemented', 'yellow'))
 
     '''TODO Small Letter Encryption Process  TODO also check for 1 char and 2 char '''   
     
@@ -271,13 +268,14 @@ def encryptStr(input_msg):
 
     else:
         '''TODO return something else if any cause arises '''
-        pass
+        print(colored("The small letter word must of minimum size 3. Due to complexity issue of base127, small letter word length < 3 can't be calculated", 'yellow'))
 
 
     '''Numbers Encryption Process '''
 
     number_x = arr_number
     if len(number_x) > 0:
+        print(colored('digits are present', color='green'))
         number_func = number.Number(number_x)
         call_num_func = number_func.encrypt_number()
       #  print(f'call_num_func: {call_num_func}')
@@ -299,16 +297,10 @@ def encryptStr(input_msg):
         secret_key_num = call_num_func
         print(f"Secret Key Num: {secret_key_num}")
 
-      
-
 
     else:
-        pass
+        print(colored("No numbers included on the word", color="magenta"))
 
-    
-    ''' TODO return the counter or identity in order to decrypt the encrypted text  '''
-
-    ''' TODO return the keys in order to arrange it in original format order '''
     
     ''' Let the dict key be our public key on order to identify it and it should be the first one to be entered to identify '''
 
@@ -338,22 +330,27 @@ def encryptStr(input_msg):
         print(f'Encrypted text order mapping: {encrypted_text_order}')
     
         ''' Concat all  the encrypted text in such a way that it is easy to identify whether it is a for Capital, Small or Number '''
+        try:
+            print(f'encrypted capital: {enc}, encrtpted small: {small_enc}, encrypted number: {num_enc}')
+        
 
-        print(f'encrypted capital: {enc}, encrtpted small: {small_enc}, encrypted number: {num_enc}')
+            ''' encrypyted text should be concatenated using " - "  '''
 
-        ''' encrypyted text should be concatenated using " - "  '''
+            final_encrypt = f'{enc}-{small_enc}-{num_enc}'
 
-        final_encrypt = f'{enc}-{small_enc}-{num_enc}'
+            print("Whole encrypted word: {0}".format(final_encrypt))
 
-        print("Whole encrypted word: {0}".format(final_encrypt))
+            ''' Calculate the xor for all the three xor keys using the xor operation '''
 
-        ''' Calculate the xor for all the three xor keys using the xor operation '''
+            # print(f"secret Keys: secret_key_small: {secret_key_small}, secrret_key_capital: {secret_key_capital}, secret_key_num: {secret_key_num}")
+            combined_secret_key = int(secret_key_small) ^ int(secret_key_capital) ^ int(secret_key_num)
 
-       # print(f"secret Keys: secret_key_small: {secret_key_small}, secrret_key_capital: {secret_key_capital}, secret_key_num: {secret_key_num}")
-        combined_secret_key = int(secret_key_small) ^ int(secret_key_capital) ^ int(secret_key_num)
-
-        print(f"Combined Secret key: {combined_secret_key}")
-        return (final_encrypt, combined_secret_key, encrypted_text_order)
+            print(f"Combined Secret key: {combined_secret_key}")
+            return (final_encrypt, combined_secret_key, encrypted_text_order)
+        except:
+            print(colored("ERROR: The text must be a combination Capital, Small and numbers and each must have length 3", 'magenta'))
+            
+           
     
     else:
         print(f'Encrypted text order mapping: {None}')

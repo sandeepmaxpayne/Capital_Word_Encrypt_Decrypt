@@ -169,7 +169,7 @@ def decryptText(encrypted_text, secret_keys, encrypted_order):
             if exact_key.__eq__(secret_key):
                 print("Secrect Key is Correct")
                 print("Decrypting Data.......")
-                time.sleep(0.5)
+                time.sleep(0.2)
                
                 print("decrpted text: ", txt)
 
@@ -184,7 +184,7 @@ def decryptText(encrypted_text, secret_keys, encrypted_order):
         if decrypt_small_text[1].__eq__(secret_key):
             print('Secret key is correct')
             print('Decrypting small text ....')
-            time.sleep(0.5)
+            time.sleep(0.2)
             print(f'decrypted small text: {decrypt_small_text[0]}')
         else:
             print("Sorry incorrect secret key entered")
@@ -196,7 +196,7 @@ def decryptText(encrypted_text, secret_keys, encrypted_order):
         if decrypt_number_str[1].__eq__(secret_key):
             print("Secret Key is correct")
             print("Decrypting number .......")
-            time.sleep(0.5)
+            time.sleep(0.2)
             print(f'decrypted number:  {decrypt_number_str[0]}')
         else:
             print("Incorrect Secret key.")
@@ -258,7 +258,7 @@ def decryptText(encrypted_text, secret_keys, encrypted_order):
             return decrypted_text
         else:
             print(ErrRed('incorrect combined secret key.'))
-            return "Incorrect combined key"  
+            return ErrRed("Incorrect combined key")  
     
     else: 
         if countsmall.__eq__(len(separate_complex[0]) - 1):
