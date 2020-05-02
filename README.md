@@ -10,6 +10,9 @@ To run :
     For Decrypting the encrypted character
 
     use the command as "python decryptText.py" in command prompt
+    
+# NEW desktop application made as an UI interaction for this whole project .
+        -> Files includes app.py
 
 # Limitations
 
