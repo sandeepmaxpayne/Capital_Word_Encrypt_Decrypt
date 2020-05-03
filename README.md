@@ -131,7 +131,10 @@ after entering the dir /Capital_Word_Encrypt_Decrypt``
 
 # Windows Executable
 
-``` TODO ```
+``` Windows Executable = app.exe
+    Location Folder = "/project exe"
+    Default = Logo is important to run app.exe in windows
+```
 
 
 <h2>License</h2>
