@@ -1,5 +1,10 @@
 from tkinter import *
 from termcolor import colored
+
+import os,sys
+parentdir = os.path.dirname("ENCRYPT")
+sys.path.insert(0,parentdir)
+
 import encryptText
 import decryptText
 
@@ -10,6 +15,7 @@ def encryptUI():
     display_key_list.delete(0.0, END)
     display_key_order.delete(0.0, END)
     display_key_order.update()
+    err_msg.delete(0.0, END)
     
     #sentences = "HELLO SANDY where have you been and whats YOUR PHONE NUMBER 1234567890 code HeL458LonEmjdhf THERE WAS CAT under the BED ofcCOodeE1237 "
     # sentences = input("Enter sentence:")
@@ -32,8 +38,10 @@ def encryptUI():
                 # print(encrypted_sentence, keylist, order)
             except:
                 print(colored("Unable to fetch the keys. Make sure that word must be a combination of  Capital, Small and number or Single Capital , Small, length words of minimum size 3", color='red'))
+                err_msg.insert(END, "Unable to fetch the keys. Make sure that word must be a combination of  Capital, Small and number or Single Capital , Small, length words of minimum size 3")
         else:
             print(colored("Word length is less than 3, cannot encrypt it", color='red'))
+            err_msg.insert(END, "Word length is less than 3, cannot encrypt it")
 
         # print(sentence)
     print(encrypted_sentence, keylist, order)
@@ -46,6 +54,15 @@ def clear_encrypted_all():
     display_encrypted_text.delete(1.0, END)
     display_key_list.delete(1.0, END)
     display_key_order.delete(1.0, END)
+    err_msg.delete(0.0, END)
+
+def clear_decrypted_all():
+    display_decrypted_text.delete(0.0, END)
+    enter_encr_value.set("")
+    enter_key.set("")
+    enter_map_key.set("")
+    err_msg.delete(0.0, END)
+
 
 
 def decryptUI():
@@ -181,20 +198,35 @@ scroll.config(command=display_decrypted_text.yview)
 display_decrypted_text.config(yscrollcommand=scroll.set)
 scroll.grid(row=20, column=7, sticky='ns')
 
-clear_btn = Button(window, text="DECRYPT", width=10, command=decryptUI)
-clear_btn.grid(row=21, column=3)
+decrypt_btn = Button(window, text="DECRYPT", width=10, command=decryptUI)
+decrypt_btn.grid(row=21, column=4)
 
-Label(window, text="Original Sentence:  ", fg="black").grid(row=22, column=4)
+clear_btn = Button(window, text="CLEAR", width=10, command=clear_decrypted_all)
+clear_btn.grid(row=21, column=5)
+
+
+Label(window, text="Original Sentence:  ", fg="black").grid(row=24, column=4)
 org_sent = Text(window, width=50, height=2)
-org_sent.grid(row=22, column=6)
+org_sent.grid(row=24, column=6)
 scroll = Scrollbar(master=window)
 scroll.config(command=org_sent.yview)
 org_sent.config(yscrollcommand=scroll.set)
-scroll.grid(row=22, column=7, sticky='ns')
+scroll.grid(row=24, column=7, sticky='ns')
 
-Label(window, text="Decrypting Success Rate:  ", fg="black").grid(row=23, column=4)
+Label(window, text="Decrypting Success Rate:  ", fg="black").grid(row=25, column=4)
 success_rate = Text(window, width=50, height=2)
-success_rate.grid(row=23, column=6)
+success_rate.grid(row=25, column=6)
+success_rate.config( foreground="green")
+
+
+Label(window, text="Error Message:  ", fg="black").grid(row=26, column=4)
+err_msg = Text(window, width=50, height=2)
+err_msg.grid(row=26, column=6)
+err_msg.config( foreground="red")
+scroll.config(command=err_msg.yview)
+err_msg.config(yscrollcommand=scroll.set)
+scroll.grid(row=26, column=7, sticky='ns')
+
 
 
 
