@@ -7,9 +7,9 @@ script_path = "calculate_decrypt/"
 
 sys.path.append(os.path.abspath(script_path))
 
-import decryptSmall
-import decrypt_number
-import decrypt_order_key
+from calculate_decrypt import decryptSmall
+from calculate_decrypt import decrypt_number
+from calculate_decrypt import decrypt_order_key
 
 class Decrypt_Single_Message:
     def __init__(self, encypt_Text):

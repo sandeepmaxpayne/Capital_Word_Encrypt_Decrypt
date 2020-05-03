@@ -7,8 +7,8 @@ scriptpath = "calculate_encrypt/"
 
 sys.path.append(os.path.abspath(scriptpath))
 
-import small_letters
-import number
+from calculate_encrypt import small_letters
+from calculate_encrypt import number
 
 
 '''
